@@ -7,6 +7,8 @@ import org.lwjgl.opengl.GL11;
 import clientname.gui.hud.ScreenPosition;
 import clientname.mods.ModDraggable;
 
+import java.awt.Color;
+
 public class ModArmorStatus extends ModDraggable {
 
     private ScreenPosition pos = ScreenPosition.fromRelativePosition(0.5, 0.5);
@@ -50,15 +52,16 @@ public class ModArmorStatus extends ModDraggable {
 
         if(itemStack.getItem().isDamageable()) {
             double damage = ((itemStack.getMaxDamage() - itemStack.getItemDamage()) / (double) itemStack.getMaxDamage()) * 100;
-            if (damage < 25) {
-                font.drawString(String.format("%.2f%%", damage), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, 0xFFFF0000);
-            }
-            else if (damage < 50) {
-                font.drawString(String.format("%.2f%%", damage), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, 0xFFFF6600);
-            }
-            else {
-                font.drawString(String.format("%.2f%%", damage), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, -1);
-            }
+//            if (damage < 25) {
+//                font.drawString(String.format("%.2f%%", damage), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, 0xFFFF0000);
+//            }
+//            else if (damage < 50) {
+//                font.drawString(String.format("%.2f%%", damage), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, 0xFFFF6600);
+//            }
+//            else {
+//                font.drawString(String.format("%.2f%%", damage), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, -1);
+//            }
+            font.drawString(String.format("%.2f%%", damage), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, DamageToColor(damage/100));
         }
 
         RenderHelper.enableGUIStandardItemLighting();
@@ -66,6 +69,19 @@ public class ModArmorStatus extends ModDraggable {
 
         GL11.glPopMatrix();
 
+    }
+
+    static int DamageToColor(double percentage) {
+        if (percentage > 1) {
+            percentage = 1;
+        }
+        else if (percentage < 0) {
+            percentage = 0;
+        }
+        int red = (int)(255.0 * (1 - percentage));
+        int green = (int)(255.0 * (percentage));
+        int blue = 0;
+        return new Color(red, green, blue).getRGB();
     }
 
     @Override
@@ -79,4 +95,3 @@ public class ModArmorStatus extends ModDraggable {
     }
 
 }
-
