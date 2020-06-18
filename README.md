@@ -1,3 +1,4 @@
 # MCP-Snippets
 
-[BetterArmorMod](BetterArmorMod/README.md)
+[BetterArmorMod](BetterArmorMod/)
+[FPSModWithSettings](FPSModWithSettings/)
