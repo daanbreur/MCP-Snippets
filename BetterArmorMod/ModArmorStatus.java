@@ -84,14 +84,4 @@ public class ModArmorStatus extends ModDraggable {
         return new Color(red, green, blue).getRGB();
     }
 
-    @Override
-    public void save(ScreenPosition pos) {
-        this.pos = pos;
-    }
-
-    @Override
-    public ScreenPosition load() {
-        return pos;
-    }
-
 }
